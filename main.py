@@ -14,6 +14,5 @@ def main():
     ftp.parse_file(list_of_edr)
 
 
-
 if __name__ == '__main__':
     main()

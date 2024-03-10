@@ -31,21 +31,21 @@ class FtpClient:
         """
         try:
             self.ftp.cwd(self.config.get('FTP', 'cwd'))
-            entries = list(self.ftp.mlsd())
+            # Получаемся список файлов
+            entries = list(self.ftp.nlst('-t'))
+            entries.sort(reverse=True)
 
-            # Сортировка по дате
-            eentries.sort(key=lambda entry: entry[1]['modify'], reverse=True)
-            entries.sort(key=lambda entry: entry[1]['modify'], reverse=True)
             for i in entries:
-                if type_of_edr in i[0].split('-') and self.config.get('FTP', f'last_file_{type_of_edr}') != i[0]:
-                    edr_to_parse.append(i[0])
-                elif self.config.get('FTP', f'last_file_{type_of_edr}') == i[0]:
+                if type_of_edr in i.split('-') and self.config.get('FTP', f'last_file_{type_of_edr}') != i:
+                    edr_to_parse.append(i)
+                elif self.config.get('FTP', f'last_file_{type_of_edr}') == i:
                     break
             return edr_to_parse
         except Exception as e:
             print(f"Error listing files: {e}")
             return []
 
+    @staticmethod
     def gunzip_bytes_obj(self, bytes_obj):
         in_ = io.BytesIO()
         in_.write(bytes_obj)
