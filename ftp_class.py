@@ -46,15 +46,15 @@ class FtpClient:
             return []
 
     @staticmethod
-    def gunzip_bytes_obj(self, bytes_obj):
+    def gunzip_bytes_obj(bytes_obj):
         in_ = io.BytesIO()
         in_.write(bytes_obj)
         in_.seek(0)
         with gzip.GzipFile(fileobj=in_, mode='rb') as fo:
-            gunzipped_bytes_obj = fo.read()
-        return gunzipped_bytes_obj.decode(encoding='unicode-escape')
+            gzipped_bytes_obj = fo.read()
+        return gzipped_bytes_obj.decode(encoding='unicode-escape')
 
-    def parse_file(self, list_of_files, ):
+    def parse_file(self, list_of_files: list):
         r = io.BytesIO()
 
         try:
@@ -64,7 +64,7 @@ class FtpClient:
                 # Распаковка файла в оперативной памяти и разбиение его по знаку '\n'
                 file = self.gunzip_bytes_obj(r.getvalue()).split('\n')
                 for i in file:
-                    print(i)
+                    return i
         except Exception as e:
             print(f"Error downloading file: {e}")
 

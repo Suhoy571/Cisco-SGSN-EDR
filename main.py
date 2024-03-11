@@ -1,10 +1,14 @@
 import configparser
 import ftp_class
+import databse
 
 
 def main():
     config = configparser.ConfigParser()
     config.read('config.ini')
+
+    postgres_db = databse.Postgres(host=config['Database']['host'], database=config['Database']['database'],
+                          password=config['Database']['password'], username=config['Database']['username'])
 
     ftp = ftp_class.FtpClient(host=config['FTP']['IP'],
                               username=config['FTP']['login'],
