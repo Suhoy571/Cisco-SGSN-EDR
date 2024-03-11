@@ -63,8 +63,8 @@ class FtpClient:
                 self.ftp.retrbinary('RETR ' + i, r.write)
                 # Распаковка файла в оперативной памяти и разбиение его по знаку '\n'
                 file = self.gunzip_bytes_obj(r.getvalue()).split('\n')
-                for i in file:
-                    print(i)
+                for k in file:
+                    print(k)
         except Exception as e:
             print(f"Error downloading file: {e}")
 
