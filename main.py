@@ -8,7 +8,7 @@ def main():
     config.read('config.ini')
 
     postgres_db = databse.Postgres(host=config['Database']['host'], database=config['Database']['database'],
-                          password=config['Database']['password'], username=config['Database']['username'])
+                                   password=config['Database']['password'], username=config['Database']['username'])
 
     ftp = ftp_class.FtpClient(host=config['FTP']['IP'],
                               username=config['FTP']['login'],

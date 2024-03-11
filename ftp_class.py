@@ -64,7 +64,7 @@ class FtpClient:
                 # Распаковка файла в оперативной памяти и разбиение его по знаку '\n'
                 file = self.gunzip_bytes_obj(r.getvalue()).split('\n')
                 for i in file:
-                    return i
+                    print(i)
         except Exception as e:
             print(f"Error downloading file: {e}")
 
